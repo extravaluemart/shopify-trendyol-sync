@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trendyol Sync Dashboard</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f1f2f4; color: #202223; min-height: 100vh; }
+    .header { background: #fff; border-bottom: 1px solid #e1e3e5; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+    .header-left { display: flex; align-items: center; gap: 12px; }
+    .logo { width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #f27a1a, #e85209); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 14px; }
+    .h1 { font-size: 16px; font-weight: 600; color: #202223; }
+    .subtitle { font-size: 12px; color: #6d7175; margin-top: 1px; }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .toggle-wrap { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
+    .toggle { position: relative; width: 44px; height: 24px; cursor: pointer; display: inline-block; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; inset: 0; border-radius: 24px; background: #d2d5d8; transition: background .2s; }
+    .slider::before { content: ''; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: #fff; top: 3px; left: 3px; transition: transform .2s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+    input:checked + .slider { background: #008060; }
+    input:checked + .slider::before { transform: translateX(20px); }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; text-decoration: none; transition: filter .15s; }
+    .btn:hover { filter: brightness(.93); }
+    .btn-orange { background: #f27a1a; color: #fff; }
+    .btn-secondary { background: #fff; color: #202223; border: 1px solid #c9cccf; }
+    .main { padding: 24px; max-width: 1100px; margin: 0 auto; }
+    .status-bar { background: #fff; border: 1px solid #e1e3e5; border-radius: 10px; padding: 14px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; font-size: 13px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dot-green { background: #008060; box-shadow: 0 0 0 3px rgba(0,128,96,.15); }
+    .dot-yellow { background: #e5a100; box-shadow: 0 0 0 3px rgba(229,161,0,.15); }
+    .dot-red { background: #d72c0d; box-shadow: 0 0 0 3px rgba(215,44,13,.15); }
+    .status-time { color: #6d7175; margin-left: auto; }
+    .refresh-btn { background: none; border: none; cursor: pointer; color: #6d7175; font-size: 12px; padding: 4px 8px; border-radius: 4px; }
+    .refresh-btn:hover { background: #f1f2f4; color: #202223; }
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+    .card { background: #fff; border: 1px solid #e1e3e5; border-radius: 10px; padding: 20px; position: relative; overflow: hidden; }
+    .card-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 10px 10px 0 0; }
+    .accent-green { background: #008060; } .accent-red { background: #d72c0d; } .accent-blue { background: #0070f3; } .accent-orange { background: #f27a1a; }
+    .card-label { font-size: 12px; color: #6d7175; font-weight: 500; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+    .card-value { font-size: 32px; font-weight: 700; color: #202223; line-height: 1; }
+    .card-sub { font-size: 12px; color: #6d7175; margin-top: 6px; }
+    .grid-2 { display: grid; grid-template-columns: 280px 1fr; gap: 16px; margin-bottom: 20px; }
+    .panel { background: #fff; border: 1px solid #e1e3e5; border-radius: 10px; overflow: hidden; }
+    .panel-header { padding: 16px 20px; border-bottom: 1px solid #e1e3e5; display: flex; align-items: center; justify-content: space-between; }
+    .panel-title { font-size: 14px; font-weight: 600; color: #202223; }
+    .chart-wrap { display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .chart-legend { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 10px; }
+    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .legend-name { flex: 1; color: #6d7175; }
+    .legend-count { font-weight: 600; color: #202223; }
+    .legend-pct { color: #6d7175; font-size: 12px; }
+    .table-wrap { overflow-x: auto; max-height: 420px; overflow-y: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 600; color: #6d7175; text-transform: uppercase; letter-spacing: .5px; background: #f6f6f7; border-bottom: 1px solid #e1e3e5; position: sticky; top: 0; }
+    tbody tr { border-bottom: 1px solid #f1f2f4; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #f9fafb; }
+    tbody td { padding: 10px 16px; color: #202223; vertical-align: middle; }
+    .td-muted { color: #6d7175; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .badge-red { background: #fff4f4; color: #d72c0d; }
+    .empty { text-align: center; padding: 48px 24px; color: #6d7175; }
+    .empty-icon { font-size: 40px; margin-bottom: 12px; }
+    .empty h3 { font-size: 15px; font-weight: 600; color: #202223; margin-bottom: 6px; }
+    .batch-list { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 20px; }
+    .batch-chip { background: #f1f2f4; border: 1px solid #e1e3e5; border-radius: 6px; padding: 4px 10px; font-size: 11px; font-family: monospace; color: #202223; }
+    #loading { position: fixed; inset: 0; background: #f1f2f4; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; z-index: 999; }
+    .spinner { width: 36px; height: 36px; border: 3px solid #e1e3e5; border-top-color: #f27a1a; border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #loading p { color: #6d7175; font-size: 14px; }
+    #error-msg { display: none; background: #fff4f4; border: 1px solid #ffc8c5; border-radius: 10px; padding: 20px; margin-bottom: 20px; color: #d72c0d; font-size: 14px; }
+    #app { display: none; }
+    @media (max-width: 900px) { .cards { grid-template-columns: repeat(2,1fr); } .grid-2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div id="loading">
+  <div class="logo" style="width:52px;height:52px;font-size:18px;border-radius:12px;">TY</div>
+  <div class="spinner"></div>
+  <p>Loading sync data...</p>
+</div>
+<div id="error-msg"></div>
+<div id="app">
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">TY</div>
+      <div>
+        <div class="h1">Trendyol Sync</div>
+        <div class="subtitle">Shopify -> Trendyol automatic sync</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="toggle-wrap">
+        <label class="toggle">
+          <input type="checkbox" id="syncToggle" checked onchange="handleToggle(this)">
+          <span class="slider"></span>
+        </label>
+        <span id="toggleLabel">Auto-sync ON</span>
+      </div>
+      <a href="https://github.com/extravaluemart/shopify-trendyol-sync/actions/workflows/sync.yml" target="_blank" class="btn btn-orange">&#x21BB; Sync Now</a>
+    </div>
+  </div>
+  <div class="main">
+    <div class="status-bar">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusLabel" style="font-weight:600;">Loading...</span>
+      <span id="statusDetail" style="color:#6d7175;font-size:13px;"></span>
+      <span class="status-time" id="lastSyncTime"></span>
+      <button class="refresh-btn" onclick="loadData()">&#x21BB; Refresh</button>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="card-accent accent-green"></div><div class="card-label">Synced to Trendyol</div><div class="card-value" id="cardSynced">-</div><div class="card-sub" id="cardSyncedSub">variants</div></div>
+      <div class="card"><div class="card-accent accent-red"></div><div class="card-label">Not Synced</div><div class="card-value" id="cardUnsynced">-</div><div class="card-sub">missing barcode</div></div>
+      <div class="card"><div class="card-accent accent-blue"></div><div class="card-label">Failed Pushes</div><div class="card-value" id="cardFailed">-</div><div class="card-sub">Trendyol API errors</div></div>
+      <div class="card"><div class="card-accent accent-orange"></div><div class="card-label">Trendyol Batches</div><div class="card-value" id="cardBatches">-</div><div class="card-sub">submitted this run</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-header"><span class="panel-title">Sync Coverage</span></div>
+        <div class="chart-wrap"><canvas id="donutChart" width="180" height="180"></canvas></div>
+        <div class="chart-legend" id="chartLegend"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Products Not Synced</span>
+          <button class="btn btn-secondary" onclick="exportExcel()">&#x2B07; Export Excel</button>
+        </div>
+        <div class="table-wrap" id="tableWrap"></div>
+      </div>
+    </div>
+    <div class="panel" id="batchPanel" style="margin-bottom:20px;">
+      <div class="panel-header"><span class="panel-title">Trendyol Batch IDs (last run)</span></div>
+      <div class="batch-list" id="batchList"></div>
+    </div>
+  </div>
+</div>
+<script>
+  const STATUS_URL = 'https://raw.githubusercontent.com/extravaluemart/shopify-trendyol-sync/main/sync_status.json';
+  const ACTIONS_URL = 'https://github.com/extravaluemart/shopify-trendyol-sync/actions/workflows/sync.yml';
+  let donutChart = null, currentData = null;
+
+  async function loadData() {
+    try {
+      const resp = await fetch(STATUS_URL + '?v=' + Date.now());
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      currentData = await resp.json();
+      render(currentData);
+    } catch(err) {
+      showError('Could not load sync status: ' + err.message + '<br><br>Make sure a sync has run at least once.');
+    }
+  }
+
+  function render(d) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    const dot = document.getElementById('statusDot');
+    const label = document.getElementById('statusLabel');
+    if (d.status === 'success') { dot.className = 'status-dot dot-green'; label.textContent = 'Last sync successful'; }
+    else if (d.status === 'partial_failure') { dot.className = 'status-dot dot-yellow'; label.textContent = 'Last sync: partial failure'; }
+    else { dot.className = 'status-dot dot-red'; label.textContent = 'Last sync failed'; }
+    document.getElementById('statusDetail').textContent = d.failed_count > 0 ? '(' + d.failed_count + ' items failed)' : '';
+    document.getElementById('lastSyncTime').textContent = formatTime(d.last_sync);
+    document.getElementById('cardSynced').textContent = d.synced_count || 0;
+    document.getElementById('cardUnsynced').textContent = d.total_without_barcode || 0;
+    document.getElementById('cardFailed').textContent = d.failed_count || 0;
+    document.getElementById('cardBatches').textContent = (d.batch_ids || []).length;
+    const total = (d.total_with_barcode || 0) + (d.total_without_barcode || 0);
+    document.getElementById('cardSyncedSub').textContent = total > 0 ? 'out of ' + total + ' total variants' : 'variants';
+    renderChart(d.total_with_barcode || 0, d.total_without_barcode || 0);
+    renderTable(d.unsynced_products || []);
+    renderBatches(d.batch_ids || []);
+    const enabled = localStorage.getItem('syncEnabled') !== 'false';
+    document.getElementById('syncToggle').checked = enabled;
+    document.getElementById('toggleLabel').textContent = enabled ? 'Auto-sync ON' : 'Auto-sync OFF';
+  }
+
+  function renderChart(synced, unsynced) {
+    const ctx = document.getElementById('donutChart').getContext('2d');
+    if (donutChart) donutChart.destroy();
+    const total = synced + unsynced;
+    const sp = total > 0 ? Math.round(synced/total*100) : 0;
+    const up = total > 0 ? Math.round(unsynced/total*100) : 0;
+    donutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: { labels: ['Synced','Not Synced'], datasets: [{ data: [synced||0.001, unsynced||0.001], backgroundColor: ['#008060','#ffc453'], borderWidth: 0, hoverOffset: 4 }] },
+      options: { cutout: '72%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ' + c.label + ': ' + (c.raw===0.001?0:c.raw) } } } }
+    });
+    document.getElementById('chartLegend').innerHTML =
+      '<div class="legend-item"><div class="legend-dot" style="background:#008060"></div><span class="legend-name">Synced to Trendyol</span><span class="legend-count">' + synced + '</span><span class="legend-pct">' + sp + '%</span></div>' +
+      '<div class="legend-item"><div class="legend-dot" style="background:#ffc453"></div><span class="legend-name">Not synced (no barcode)</span><span class="legend-count">' + unsynced + '</span><span class="legend-pct">' + up + '%</span></div>';
+  }
+
+  function renderTable(products) {
+    const wrap = document.getElementById('tableWrap');
+    if (!products || products.length === 0) {
+      wrap.innerHTML = '<div class="empty"><div class="empty-icon">&#x2705;</div><h3>All products are synced!</h3><p>Every variant has a barcode and is being updated on Trendyol.</p></div>';
+      return;
+    }
+    const rows = products.map(p => '<tr><td><div style="font-weight:500;">' + esc(p.title) + '</div><div class="td-muted" style="font-size:12px;">' + esc(p.variant||'') + '</div></td><td class="td-muted">' + esc(p.sku) + '</td><td>$' + (+p.shopify_price).toFixed(2) + '</td><td>$' + (+p.trendyol_price).toFixed(2) + '</td><td><span class="badge badge-red">' + esc(p.reason) + '</span></td></tr>').join('');
+    wrap.innerHTML = '<table><thead><tr><th>Product</th><th>SKU</th><th>Shopify Price</th><th>Trendyol Price</th><th>Reason</th></tr></thead><tbody>' + rows + '</tbody></table>';
+  }
+
+  function renderBatches(ids) {
+    const list = document.getElementById('batchList');
+    if (!ids || ids.length === 0) { list.innerHTML = '<span style="color:#6d7175;font-size:13px;">No batches yet.</span>'; return; }
+    list.innerHTML = ids.map(id => '<span class="batch-chip">' + esc(id) + '</span>').join('');
+  }
+
+  function exportExcel() {
+    const products = currentData && currentData.unsynced_products || [];
+    if (!products.length) { alert('No unsynced products to export.'); return; }
+    const rows = products.map(p => ({ 'Product Title': p.title, 'Variant': p.variant, 'SKU': p.sku, 'Shopify Price': p.shopify_price, 'Trendyol Price': p.trendyol_price, 'Reason': p.reason }));
+    const ws = XLSX.utils.json_to_sheet(rows);
+    ws['!cols'] = [{wch:40},{wch:20},{wch:18},{wch:14},{wch:14},{wch:16}];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Not Synced');
+    XLSX.writeFile(wb, 'trendyol_not_synced_' + new Date().toISOString().slice(0,10) + '.xlsx');
+  }
+
+  function handleToggle(checkbox) {
+    const enabled = checkbox.checked;
+    localStorage.setItem('syncEnabled', enabled);
+    document.getElementById('toggleLabel').textContent = enabled ? 'Auto-sync ON' : 'Auto-sync OFF';
+    const msg = enabled
+      ? 'To re-enable auto-sync, enable the GitHub Actions workflow.\n\nClick OK to open GitHub Actions.'
+      : 'To disable auto-sync, disable the GitHub Actions workflow.\n\nClick OK to open GitHub Actions - then click ... menu -> Disable workflow.';
+    if (confirm(msg)) window.open(ACTIONS_URL, '_blank');
+  }
+
+  function formatTime(iso) {
+    if (!iso) return '-';
+    return new Date(iso).toLocaleString('en-GB', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit', timeZoneName:'short' });
+  }
+
+  function esc(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function showError(msg) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    const el = document.getElementById('error-msg');
+    el.style.display = 'block';
+    el.innerHTML = '&#x26A0;&#xFE0F; ' + msg;
+  }
+
+  loadData();
+  setInterval(loadData, 5 * 60 * 1000);
+</script>
+</body>
+</html>
