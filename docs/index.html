@@ -200,7 +200,7 @@
       wrap.innerHTML = '<div class="empty"><div class="empty-icon">&#x2705;</div><h3>All products are synced!</h3><p>Every variant has a barcode and is being updated on Trendyol.</p></div>';
       return;
     }
-    const rows = products.map(p => '<tr><td><div style="font-weight:500;">' + esc(p.title) + '</div><div class="td-muted" style="font-size:12px;">' + esc(p.variant||'') + '</div></td><td class="td-muted">' + esc(p.sku) + '</td><td>$' + (+p.shopify_price).toFixed(2) + '</td><td>$' + (+p.trendyol_price).toFixed(2) + '</td><td><span class="badge badge-red">' + esc(p.reason) + '</span></td></tr>').join('');
+    const rows = products.map(p => '<tr><td><div style="font-weight:500;">' + esc(p.title) + '</div><div class="td-muted" style="font-size:12px;">' + esc(p.variant||'') + '</div></td><td class="td-muted">' + esc(p.sku) + '</td><td>AED ' + (+p.shopify_price).toFixed(2) + '</td><td>AED ' + (+p.trendyol_price).toFixed(2) + '</td><td><span class="badge badge-red">' + esc(p.reason) + '</span></td></tr>').join('');
     wrap.innerHTML = '<table><thead><tr><th>Product</th><th>SKU</th><th>Shopify Price</th><th>Trendyol Price</th><th>Reason</th></tr></thead><tbody>' + rows + '</tbody></table>';
   }
 
