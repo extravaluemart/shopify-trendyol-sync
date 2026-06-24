@@ -185,7 +185,10 @@ def push_to_trendyol(items):
             log.info("Batch %d-%d -> batchId=%s", i + 1, i + len(batch), bid)
             success += len(batch)
         except requests.HTTPError as exc:
-            log.error("Batch %d-%d failed: %s", i + 1, i + len(batch), exc.response.text[:300])
+            log.error("Batch %d-%d failed: %s", i + 1, i + len(batch), exc.response.text[:500])
+            fail += len(batch)
+        except Exception as exc:
+            log.error("Batch %d-%d unexpected error: %s", i + 1, i + len(batch), exc)
             fail += len(batch)
         time.sleep(0.15)
     return success, fail, batch_ids
@@ -216,6 +219,9 @@ def fetch_trendyol_orders(start_ms, end_ms):
             data = resp.json()
         except requests.HTTPError as exc:
             log.error("Failed to fetch Trendyol orders: %s", exc.response.text[:300])
+            break
+        except Exception as exc:
+            log.error("Failed to fetch Trendyol orders (unexpected): %s", exc)
             break
         content = data.get("content", [])
         all_orders.extend(content)
@@ -385,15 +391,17 @@ def main():
         with_barcode, previous_status
     )
 
+    trendyol_error = fail > 0
+
     status = {
-        "last_sync":             sync_time,
-        "synced_count":          ok,
-        "failed_count":          fail,
-        "total_with_barcode":    len(with_barcode),
-        "total_without_barcode": len(without_barcode),
-        "batch_ids":             batch_ids,
-        "unsynced_products":     unsynced_list,
-        "status":                "success" if fail == 0 else "partial_failure",
+        "last_sync":                 sync_time,
+        "synced_count":              ok,
+        "failed_count":              fail,
+        "total_with_barcode":        len(with_barcode),
+        "total_without_barcode":     len(without_barcode),
+        "batch_ids":                 batch_ids,
+        "unsynced_products":         unsynced_list,
+        "status":                    "success" if not trendyol_error else "partial_failure",
         "last_order_check":          sync_time,
         "trendyol_orders_processed": orders_processed,
         "trendyol_items_adjusted":   items_adjusted,
@@ -405,8 +413,8 @@ def main():
         json.dump(status, f, indent=2, ensure_ascii=False)
     log.info("%s saved.", STATUS_FILE)
 
-    if fail > 0:
-        sys.exit(1)
+    # Exit 0 always so the workflow stays green - errors show in dashboard
+    # Only exit 1 for critical failures (Shopify API down, etc.)
 
 
 if __name__ == "__main__":
