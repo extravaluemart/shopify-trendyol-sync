@@ -15,13 +15,6 @@
     .h1 { font-size: 16px; font-weight: 600; color: #202223; }
     .subtitle { font-size: 12px; color: #6d7175; margin-top: 1px; }
     .header-actions { display: flex; align-items: center; gap: 10px; }
-    .toggle-wrap { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
-    .toggle { position: relative; width: 44px; height: 24px; cursor: pointer; display: inline-block; }
-    .toggle input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; inset: 0; border-radius: 24px; background: #d2d5d8; transition: background .2s; }
-    .slider::before { content: ''; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: #fff; top: 3px; left: 3px; transition: transform .2s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
-    input:checked + .slider { background: #008060; }
-    input:checked + .slider::before { transform: translateX(20px); }
     .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; text-decoration: none; transition: filter .15s; }
     .btn:hover { filter: brightness(.93); }
     .btn-orange { background: #f27a1a; color: #fff; }
@@ -35,15 +28,19 @@
     .status-time { color: #6d7175; margin-left: auto; }
     .refresh-btn { background: none; border: none; cursor: pointer; color: #6d7175; font-size: 12px; padding: 4px 8px; border-radius: 4px; }
     .refresh-btn:hover { background: #f1f2f4; color: #202223; }
+    .section-title { font-size: 13px; font-weight: 600; color: #6d7175; text-transform: uppercase; letter-spacing: .6px; margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: #e1e3e5; }
     .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+    .cards-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 20px; }
     .card { background: #fff; border: 1px solid #e1e3e5; border-radius: 10px; padding: 20px; position: relative; overflow: hidden; }
     .card-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 10px 10px 0 0; }
-    .accent-green { background: #008060; } .accent-red { background: #d72c0d; } .accent-blue { background: #0070f3; } .accent-orange { background: #f27a1a; }
+    .accent-green { background: #008060; } .accent-red { background: #d72c0d; } .accent-blue { background: #0070f3; } .accent-orange { background: #f27a1a; } .accent-purple { background: #8860d0; }
     .card-label { font-size: 12px; color: #6d7175; font-weight: 500; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
     .card-value { font-size: 32px; font-weight: 700; color: #202223; line-height: 1; }
     .card-sub { font-size: 12px; color: #6d7175; margin-top: 6px; }
     .grid-2 { display: grid; grid-template-columns: 280px 1fr; gap: 16px; margin-bottom: 20px; }
-    .panel { background: #fff; border: 1px solid #e1e3e5; border-radius: 10px; overflow: hidden; }
+    .panel { background: #fff; border: 1px solid #e1e3e5; border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+    .panel:last-child { margin-bottom: 0; }
     .panel-header { padding: 16px 20px; border-bottom: 1px solid #e1e3e5; display: flex; align-items: center; justify-content: space-between; }
     .panel-title { font-size: 14px; font-weight: 600; color: #202223; }
     .chart-wrap { display: flex; align-items: center; justify-content: center; padding: 20px; }
@@ -63,6 +60,7 @@
     .td-muted { color: #6d7175; }
     .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
     .badge-red { background: #fff4f4; color: #d72c0d; }
+    .badge-blue { background: #f0f5ff; color: #0070f3; }
     .empty { text-align: center; padding: 48px 24px; color: #6d7175; }
     .empty-icon { font-size: 40px; margin-bottom: 12px; }
     .empty h3 { font-size: 15px; font-weight: 600; color: #202223; margin-bottom: 6px; }
@@ -74,7 +72,9 @@
     #loading p { color: #6d7175; font-size: 14px; }
     #error-msg { display: none; background: #fff4f4; border: 1px solid #ffc8c5; border-radius: 10px; padding: 20px; margin-bottom: 20px; color: #d72c0d; font-size: 14px; }
     #app { display: none; }
-    @media (max-width: 900px) { .cards { grid-template-columns: repeat(2,1fr); } .grid-2 { grid-template-columns: 1fr; } }
+    .adj-row-new { background: #f0faf7 !important; }
+    .stock-chip { display: inline-block; background: #f1f2f4; border-radius: 4px; padding: 1px 6px; font-size: 12px; font-family: monospace; }
+    @media (max-width: 900px) { .cards { grid-template-columns: repeat(2,1fr); } .cards-2 { grid-template-columns: 1fr; } .grid-2 { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -90,17 +90,10 @@
       <div class="logo">TY</div>
       <div>
         <div class="h1">Trendyol Sync</div>
-        <div class="subtitle">Shopify -> Trendyol automatic sync</div>
+        <div class="subtitle">Shopify &#x21C4; Trendyol two-way sync</div>
       </div>
     </div>
     <div class="header-actions">
-      <div class="toggle-wrap">
-        <label class="toggle">
-          <input type="checkbox" id="syncToggle" checked onchange="handleToggle(this)">
-          <span class="slider"></span>
-        </label>
-        <span id="toggleLabel">Auto-sync ON</span>
-      </div>
       <a href="https://github.com/extravaluemart/shopify-trendyol-sync/actions/workflows/sync.yml" target="_blank" class="btn btn-orange">&#x21BB; Sync Now</a>
     </div>
   </div>
@@ -112,6 +105,7 @@
       <span class="status-time" id="lastSyncTime"></span>
       <button class="refresh-btn" onclick="loadData()">&#x21BB; Refresh</button>
     </div>
+    <div class="section-title">&#x2191; Shopify &rarr; Trendyol (price &amp; stock push)</div>
     <div class="cards">
       <div class="card"><div class="card-accent accent-green"></div><div class="card-label">Synced to Trendyol</div><div class="card-value" id="cardSynced">-</div><div class="card-sub" id="cardSyncedSub">variants</div></div>
       <div class="card"><div class="card-accent accent-red"></div><div class="card-label">Not Synced</div><div class="card-value" id="cardUnsynced">-</div><div class="card-sub">missing barcode</div></div>
@@ -132,15 +126,26 @@
         <div class="table-wrap" id="tableWrap"></div>
       </div>
     </div>
-    <div class="panel" id="batchPanel" style="margin-bottom:20px;">
+    <div class="panel" style="margin-bottom:20px;">
       <div class="panel-header"><span class="panel-title">Trendyol Batch IDs (last run)</span></div>
       <div class="batch-list" id="batchList"></div>
+    </div>
+    <div class="section-title">&#x2193; Trendyol &rarr; Shopify (order stock deduction)</div>
+    <div class="cards-2">
+      <div class="card"><div class="card-accent accent-purple"></div><div class="card-label">Trendyol Orders Processed</div><div class="card-value" id="cardOrders">-</div><div class="card-sub" id="cardOrdersSub">this run</div></div>
+      <div class="card"><div class="card-accent accent-green"></div><div class="card-label">Shopify Stock Adjustments</div><div class="card-value" id="cardAdjusted">-</div><div class="card-sub">line items deducted this run</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Recent Stock Adjustments (Trendyol &rarr; Shopify)</span>
+        <span id="lastOrderCheck" style="font-size:12px;color:#6d7175;"></span>
+      </div>
+      <div class="table-wrap" id="adjTableWrap"></div>
     </div>
   </div>
 </div>
 <script>
   const STATUS_URL = 'https://raw.githubusercontent.com/extravaluemart/shopify-trendyol-sync/main/sync_status.json';
-  const ACTIONS_URL = 'https://github.com/extravaluemart/shopify-trendyol-sync/actions/workflows/sync.yml';
   let donutChart = null, currentData = null;
 
   async function loadData() {
@@ -173,9 +178,14 @@
     renderChart(d.total_with_barcode || 0, d.total_without_barcode || 0);
     renderTable(d.unsynced_products || []);
     renderBatches(d.batch_ids || []);
-    const enabled = localStorage.getItem('syncEnabled') !== 'false';
-    document.getElementById('syncToggle').checked = enabled;
-    document.getElementById('toggleLabel').textContent = enabled ? 'Auto-sync ON' : 'Auto-sync OFF';
+    const ordersThisRun = d.trendyol_orders_processed || 0;
+    document.getElementById('cardOrders').textContent = ordersThisRun;
+    document.getElementById('cardAdjusted').textContent = d.trendyol_items_adjusted || 0;
+    document.getElementById('cardOrdersSub').textContent = ordersThisRun === 0 ? 'this run (no new orders)' : 'this run';
+    if (d.last_order_check) {
+      document.getElementById('lastOrderCheck').textContent = 'Last checked: ' + formatTime(d.last_order_check);
+    }
+    renderAdjustmentLog(d.trendyol_adjustment_log || []);
   }
 
   function renderChart(synced, unsynced) {
@@ -200,7 +210,13 @@
       wrap.innerHTML = '<div class="empty"><div class="empty-icon">&#x2705;</div><h3>All products are synced!</h3><p>Every variant has a barcode and is being updated on Trendyol.</p></div>';
       return;
     }
-    const rows = products.map(p => '<tr><td><div style="font-weight:500;">' + esc(p.title) + '</div><div class="td-muted" style="font-size:12px;">' + esc(p.variant||'') + '</div></td><td class="td-muted">' + esc(p.sku) + '</td><td>AED ' + (+p.shopify_price).toFixed(2) + '</td><td>AED ' + (+p.trendyol_price).toFixed(2) + '</td><td><span class="badge badge-red">' + esc(p.reason) + '</span></td></tr>').join('');
+    const rows = products.map(p =>
+      '<tr><td><div style="font-weight:500;">' + esc(p.title) + '</div><div class="td-muted" style="font-size:12px;">' + esc(p.variant||'') + '</div></td>' +
+      '<td class="td-muted">' + esc(p.sku) + '</td>' +
+      '<td>AED ' + (+p.shopify_price).toFixed(2) + '</td>' +
+      '<td>AED ' + (+p.trendyol_price).toFixed(2) + '</td>' +
+      '<td><span class="badge badge-red">' + esc(p.reason) + '</span></td></tr>'
+    ).join('');
     wrap.innerHTML = '<table><thead><tr><th>Product</th><th>SKU</th><th>Shopify Price</th><th>Trendyol Price</th><th>Reason</th></tr></thead><tbody>' + rows + '</tbody></table>';
   }
 
@@ -210,25 +226,36 @@
     list.innerHTML = ids.map(id => '<span class="batch-chip">' + esc(id) + '</span>').join('');
   }
 
+  function renderAdjustmentLog(log) {
+    const wrap = document.getElementById('adjTableWrap');
+    if (!log || log.length === 0) {
+      wrap.innerHTML = '<div class="empty"><div class="empty-icon">&#x1F4E6;</div><h3>No stock adjustments yet</h3><p>When Trendyol orders come in, stock deductions will appear here.</p></div>';
+      return;
+    }
+    const rows = [...log].reverse().slice(0, 50).map((entry, i) =>
+      '<tr' + (i < 3 ? ' class="adj-row-new"' : '') + '>' +
+      '<td class="td-muted" style="font-size:12px;white-space:nowrap;">' + formatTime(entry.ts) + '</td>' +
+      '<td><span class="badge badge-blue">' + esc(entry.order_id) + '</span></td>' +
+      '<td class="td-muted" style="font-family:monospace;font-size:12px;">' + esc(entry.barcode) + '</td>' +
+      '<td style="color:#d72c0d;font-weight:600;">' + entry.adjustment + '</td>' +
+      '<td><span class="stock-chip">' + (entry.new_stock !== null && entry.new_stock !== undefined ? entry.new_stock : '-') + '</span></td>' +
+      '</tr>'
+    ).join('');
+    wrap.innerHTML = '<table><thead><tr><th>Time</th><th>Order ID</th><th>Barcode</th><th>Adjustment</th><th>New Stock</th></tr></thead><tbody>' + rows + '</tbody></table>';
+  }
+
   function exportExcel() {
     const products = currentData && currentData.unsynced_products || [];
     if (!products.length) { alert('No unsynced products to export.'); return; }
-    const rows = products.map(p => ({ 'Product Title': p.title, 'Variant': p.variant, 'SKU': p.sku, 'Shopify Price': p.shopify_price, 'Trendyol Price': p.trendyol_price, 'Reason': p.reason }));
+    const rows = products.map(p => ({
+      'Product Title': p.title, 'Variant': p.variant, 'SKU': p.sku,
+      'Shopify Price (AED)': p.shopify_price, 'Trendyol Price (AED)': p.trendyol_price, 'Reason': p.reason
+    }));
     const ws = XLSX.utils.json_to_sheet(rows);
-    ws['!cols'] = [{wch:40},{wch:20},{wch:18},{wch:14},{wch:14},{wch:16}];
+    ws['!cols'] = [{wch:40},{wch:20},{wch:18},{wch:18},{wch:18},{wch:16}];
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Not Synced');
     XLSX.writeFile(wb, 'trendyol_not_synced_' + new Date().toISOString().slice(0,10) + '.xlsx');
-  }
-
-  function handleToggle(checkbox) {
-    const enabled = checkbox.checked;
-    localStorage.setItem('syncEnabled', enabled);
-    document.getElementById('toggleLabel').textContent = enabled ? 'Auto-sync ON' : 'Auto-sync OFF';
-    const msg = enabled
-      ? 'To re-enable auto-sync, enable the GitHub Actions workflow.\n\nClick OK to open GitHub Actions.'
-      : 'To disable auto-sync, disable the GitHub Actions workflow.\n\nClick OK to open GitHub Actions - then click ... menu -> Disable workflow.';
-    if (confirm(msg)) window.open(ACTIONS_URL, '_blank');
   }
 
   function formatTime(iso) {
