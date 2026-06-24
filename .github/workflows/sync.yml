@@ -1,0 +1,32 @@
+name: Shopify Trendyol Sync
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run sync script
+        env:
+          SHOPIFY_STORE_URL:      ${{ secrets.SHOPIFY_STORE_URL }}
+          SHOPIFY_ACCESS_TOKEN:   ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
+          TRENDYOL_SUPPLIER_ID:   ${{ secrets.TRENDYOL_SUPPLIER_ID }}
+          TRENDYOL_API_KEY:       ${{ secrets.TRENDYOL_API_KEY }}
+          TRENDYOL_API_SECRET:    ${{ secrets.TRENDYOL_API_SECRET }}
+        run: python sync.py
