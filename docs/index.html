@@ -94,7 +94,8 @@
       </div>
     </div>
     <div class="header-actions">
-      <a href="https://github.com/extravaluemart/shopify-trendyol-sync/actions/workflows/sync.yml" target="_blank" class="btn btn-orange">&#x21BB; Sync Now</a>
+      <button class="btn btn-orange" id="syncBtn" onclick="triggerSync()">&#x21BB; Sync Now</button>
+      <button class="btn btn-secondary" onclick="resetToken()" title="Reset GitHub token" style="padding:8px 10px;">&#x1F511;</button>
     </div>
   </div>
   <div class="main">
@@ -256,6 +257,61 @@
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Not Synced');
     XLSX.writeFile(wb, 'trendyol_not_synced_' + new Date().toISOString().slice(0,10) + '.xlsx');
+  }
+
+  async function triggerSync() {
+    let token = localStorage.getItem('gh_pat');
+    if (!token) {
+      token = prompt(
+        'Enter your GitHub Personal Access Token to trigger sync.\n\n' +
+        'Create one at: github.com/settings/tokens\n' +
+        'Required scope: workflow\n\n' +
+        'Your token is saved only in this browser and never shared.'
+      );
+      if (!token) return;
+      localStorage.setItem('gh_pat', token.trim());
+    }
+    const btn = document.getElementById('syncBtn');
+    btn.textContent = '⏳ Triggering...';
+    btn.disabled = true;
+    try {
+      const resp = await fetch(
+        'https://api.github.com/repos/extravaluemart/shopify-trendyol-sync/actions/workflows/sync.yml/dispatches',
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + token.trim(),
+            'Accept': 'application/vnd.github+json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ ref: 'main' }),
+        }
+      );
+      if (resp.status === 204) {
+        btn.textContent = '✅ Sync triggered!';
+        setTimeout(() => { btn.textContent = '↻ Sync Now'; btn.disabled = false; }, 4000);
+        setTimeout(loadData, 22000);
+      } else if (resp.status === 401 || resp.status === 403) {
+        localStorage.removeItem('gh_pat');
+        btn.textContent = '↻ Sync Now';
+        btn.disabled = false;
+        alert('Token invalid or expired — please try again with a valid token (scope: workflow).');
+      } else {
+        const err = await resp.json().catch(() => ({}));
+        btn.textContent = '↻ Sync Now';
+        btn.disabled = false;
+        alert('Failed: ' + (err.message || resp.status));
+      }
+    } catch(e) {
+      btn.textContent = '↻ Sync Now';
+      btn.disabled = false;
+      alert('Network error: ' + e.message);
+    }
+  }
+
+  function resetToken() {
+    localStorage.removeItem('gh_pat');
+    alert('GitHub token cleared. You will be prompted next time you click Sync Now.');
   }
 
   function formatTime(iso) {
