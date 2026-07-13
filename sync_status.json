@@ -1,11 +1,11 @@
 {
-  "last_sync": "2026-07-13T10:42:23Z",
-  "synced_count": 95,
+  "last_sync": "2026-07-13T18:11:55Z",
+  "synced_count": 98,
   "failed_count": 0,
-  "total_with_barcode": 95,
-  "total_without_barcode": 14,
+  "total_with_barcode": 98,
+  "total_without_barcode": 11,
   "batch_ids": [
-    "890acb51-7ea7-11f1-8e94-0ea444a79d89-1783953744"
+    "55cfde82-7ee6-11f1-9597-9a68209aebd2-1783980717"
   ],
   "unsynced_products": [
     {
@@ -95,34 +95,10 @@
       "shopify_price": 45.0,
       "trendyol_price": 64.25,
       "reason": "No barcode"
-    },
-    {
-      "title": "Hikari Ultrafresh Sunscreen SPF50 PA++++ 50ml",
-      "variant": "Default Title",
-      "sku": "-",
-      "shopify_price": 45.0,
-      "trendyol_price": 64.25,
-      "reason": "No barcode"
-    },
-    {
-      "title": "Hegerbaby Ricepure Baby Lotion 50ml",
-      "variant": "50 ML",
-      "sku": "-",
-      "shopify_price": 38.0,
-      "trendyol_price": 55.5,
-      "reason": "No barcode"
-    },
-    {
-      "title": "Buds & Blooms Reusable Breast Relief Doughnut",
-      "variant": "1",
-      "sku": "-",
-      "shopify_price": 60.0,
-      "trendyol_price": 83.0,
-      "reason": "No barcode"
     }
   ],
   "status": "success",
-  "last_order_check": "2026-07-13T10:42:23Z",
+  "last_order_check": "2026-07-13T18:11:55Z",
   "trendyol_orders_processed": 0,
   "trendyol_items_adjusted": 0,
   "trendyol_adjustment_log": [],
