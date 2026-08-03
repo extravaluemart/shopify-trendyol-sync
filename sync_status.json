@@ -1,12 +1,12 @@
 {
-  "last_sync": "2026-08-03T16:29:30Z",
+  "last_sync": "2026-08-03T18:20:56Z",
   "synced_count": 101,
   "failed_count": 0,
   "total_with_barcode": 101,
   "total_without_barcode": 11,
   "batch_ids": [
-    "817fdbc0-8f58-11f1-9f52-224c78041e18-1785788971",
-    "81b87705-8f58-11f1-9905-ae0f5626dd76-1785788972"
+    "130f33c2-8f68-11f1-9f52-224c78041e18-1785795658",
+    "13516d1a-8f68-11f1-b04d-3ab3d982519c-1785795658"
   ],
   "unsynced_products": [
     {
@@ -85,8 +85,8 @@
       "title": "Buds & Blooms Nipple Nurse (15g)",
       "variant": "15g",
       "sku": "4209598202711",
-      "shopify_price": 30.0,
-      "trendyol_price": 45.5,
+      "shopify_price": 40.0,
+      "trendyol_price": 58.0,
       "reason": "No barcode"
     },
     {
@@ -99,7 +99,7 @@
     }
   ],
   "status": "success",
-  "last_order_check": "2026-08-03T16:29:30Z",
+  "last_order_check": "2026-08-03T18:20:56Z",
   "trendyol_orders_processed": 0,
   "trendyol_items_adjusted": 0,
   "trendyol_adjustment_log": [],
