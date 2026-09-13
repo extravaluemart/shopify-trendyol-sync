@@ -1,12 +1,12 @@
 {
-  "last_sync": "2026-09-13T06:39:21Z",
+  "last_sync": "2026-09-13T12:37:38Z",
   "synced_count": 101,
   "failed_count": 0,
   "total_with_barcode": 101,
   "total_without_barcode": 15,
   "batch_ids": [
-    "db5ce4b0-af3d-11f1-a8fc-72b0dded34dc-1789295963",
-    "df01d0c7-af3d-11f1-a9ff-c610ee64e3ea-1789295969"
+    "e8fd48b3-af6f-11f1-bfcc-7a65a8098b8a-1789317461",
+    "e9814641-af6f-11f1-a41a-12ade837d3c0-1789317461"
   ],
   "unsynced_products": [
     {
@@ -131,7 +131,7 @@
     }
   ],
   "status": "success",
-  "last_order_check": "2026-09-13T06:39:21Z",
+  "last_order_check": "2026-09-13T12:37:38Z",
   "trendyol_orders_processed": 0,
   "trendyol_items_adjusted": 0,
   "trendyol_adjustment_log": [],
