@@ -1,12 +1,12 @@
 {
-  "last_sync": "2026-09-13T01:20:48Z",
+  "last_sync": "2026-09-13T06:39:21Z",
   "synced_count": 101,
   "failed_count": 0,
   "total_with_barcode": 101,
-  "total_without_barcode": 11,
+  "total_without_barcode": 15,
   "batch_ids": [
-    "5b33c4a0-af11-11f1-a6bd-c222365aebb5-1789276850",
-    "5bb26a92-af11-11f1-b921-62ac789db704-1789276851"
+    "db5ce4b0-af3d-11f1-a8fc-72b0dded34dc-1789295963",
+    "df01d0c7-af3d-11f1-a9ff-c610ee64e3ea-1789295969"
   ],
   "unsynced_products": [
     {
@@ -96,10 +96,42 @@
       "shopify_price": 45.0,
       "trendyol_price": 64.25,
       "reason": "No barcode"
+    },
+    {
+      "title": "TinyBuds Kidlat Kids Shampoo 200ml | Gentle Hair Care UAE",
+      "variant": "200ml",
+      "sku": "TB-KIDLAT-SHAMPOO-200ML",
+      "shopify_price": 50.0,
+      "trendyol_price": 70.5,
+      "reason": "No barcode"
+    },
+    {
+      "title": "TinyBuds Kidlat Kids Conditioner 200ml | Soft Smooth Hair UAE",
+      "variant": "200ml",
+      "sku": "TB-KIDLAT-CONDITIONER-200ML",
+      "shopify_price": 50.0,
+      "trendyol_price": 70.5,
+      "reason": "No barcode"
+    },
+    {
+      "title": "Nature to Nurture Tooth Explorers 3D Training Toothbrush 2 Years Up | Kids Oral Care UAE",
+      "variant": "Yellow",
+      "sku": "NTN-TOOTH-EXPLORERS-YELLOW",
+      "shopify_price": 35.0,
+      "trendyol_price": 51.75,
+      "reason": "No barcode"
+    },
+    {
+      "title": "Hegerbaby Baby Bath Soak 7 Pieces | Natural Herbal Comfort Bath UAE",
+      "variant": "1 Pack (7 Pieces)",
+      "sku": "HB-BATH-SOAK-7PC",
+      "shopify_price": 40.0,
+      "trendyol_price": 58.0,
+      "reason": "No barcode"
     }
   ],
   "status": "success",
-  "last_order_check": "2026-09-13T01:20:48Z",
+  "last_order_check": "2026-09-13T06:39:21Z",
   "trendyol_orders_processed": 0,
   "trendyol_items_adjusted": 0,
   "trendyol_adjustment_log": [],
