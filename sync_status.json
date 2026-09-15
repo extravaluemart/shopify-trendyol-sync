@@ -1,12 +1,12 @@
 {
-  "last_sync": "2026-09-15T07:27:59Z",
+  "last_sync": "2026-09-15T12:51:17Z",
   "synced_count": 101,
   "failed_count": 0,
   "total_with_barcode": 101,
   "total_without_barcode": 15,
   "batch_ids": [
-    "fb5509d3-b0d6-11f1-a230-ce6f1168807a-1789471681",
-    "fb9a9e02-b0d6-11f1-b865-ba46040b0421-1789471681"
+    "25efe419-b104-11f1-bfcc-7a65a8098b8a-1789491079",
+    "2627bda8-b104-11f1-888d-82d00d88af32-1789491080"
   ],
   "unsynced_products": [
     {
@@ -98,7 +98,7 @@
       "reason": "No barcode"
     },
     {
-      "title": "TinyBuds Kidlat Kids Shampoo 200ml | Gentle Hair Care UAE",
+      "title": "Tiny Buds Kidlat Kids Shampoo 200ml | Gentle Hair Care",
       "variant": "200ml",
       "sku": "TB-KIDLAT-SHAMPOO-200ML",
       "shopify_price": 50.0,
@@ -106,7 +106,7 @@
       "reason": "No barcode"
     },
     {
-      "title": "TinyBuds Kidlat Kids Conditioner 200ml | Soft Smooth Hair UAE",
+      "title": "Tiny Buds Kidlat Kids Conditioner 200ml | Soft Smooth Hair",
       "variant": "200ml",
       "sku": "TB-KIDLAT-CONDITIONER-200ML",
       "shopify_price": 50.0,
@@ -122,7 +122,7 @@
       "reason": "No barcode"
     },
     {
-      "title": "Hegerbaby Baby Bath Soak 7 Pieces | Natural Herbal Comfort Bath UAE",
+      "title": "Hegerbaby Baby Bath Soak 7 Pieces | Natural Herbal Comfort Bath",
       "variant": "1 Pack (7 Pieces)",
       "sku": "HB-BATH-SOAK-7PC",
       "shopify_price": 40.0,
@@ -131,7 +131,7 @@
     }
   ],
   "status": "success",
-  "last_order_check": "2026-09-15T07:27:59Z",
+  "last_order_check": "2026-09-15T12:51:17Z",
   "trendyol_orders_processed": 0,
   "trendyol_items_adjusted": 0,
   "trendyol_adjustment_log": [],
