@@ -1,12 +1,12 @@
 {
-  "last_sync": "2026-10-11T13:19:24Z",
+  "last_sync": "2026-10-11T18:20:59Z",
   "synced_count": 105,
   "failed_count": 0,
   "total_with_barcode": 105,
-  "total_without_barcode": 11,
+  "total_without_barcode": 15,
   "batch_ids": [
-    "61e18b80-c576-11f1-bb9f-8af7ecd067e8-1791739166",
-    "625ed1ee-c576-11f1-9547-62653ae27db5-1791739167"
+    "82ddd004-c5a0-11f1-a49f-c2ceb0e53212-1791757260",
+    "831fbb11-c5a0-11f1-9547-62653ae27db5-1791757261"
   ],
   "unsynced_products": [
     {
@@ -96,10 +96,42 @@
       "shopify_price": 45.0,
       "trendyol_price": 64.25,
       "reason": "No barcode"
+    },
+    {
+      "title": "Tiny Buds Achoo Choo Bath Soak 4 Pieces | Herbal Bath for Stuffy Nose Days",
+      "variant": "1 Pack (4 Pieces)",
+      "sku": "-",
+      "shopify_price": 30.0,
+      "trendyol_price": 45.5,
+      "reason": "No barcode"
+    },
+    {
+      "title": "Tiny Buds Koff Koff Bath Soak 4 Pieces | Herbal Bath for Stuffy Chest & Cough Days",
+      "variant": "1 Pack (4 Pieces)",
+      "sku": "-",
+      "shopify_price": 30.0,
+      "trendyol_price": 45.5,
+      "reason": "No barcode"
+    },
+    {
+      "title": "Tiny Buds BuuBuu Kiddie Bath Soak | Mineral-Rich Relaxing Bath for Kids",
+      "variant": "1 Pack",
+      "sku": "-",
+      "shopify_price": 30.0,
+      "trendyol_price": 45.5,
+      "reason": "No barcode"
+    },
+    {
+      "title": "Baby Hand-Pull Nasal Aspirator | Manual Snot Sucker for Infants & Kids",
+      "variant": "1 PC",
+      "sku": "-",
+      "shopify_price": 35.0,
+      "trendyol_price": 51.75,
+      "reason": "No barcode"
     }
   ],
   "status": "success",
-  "last_order_check": "2026-10-11T13:19:24Z",
+  "last_order_check": "2026-10-11T18:20:59Z",
   "trendyol_orders_processed": 0,
   "trendyol_items_adjusted": 0,
   "trendyol_adjustment_log": [],
