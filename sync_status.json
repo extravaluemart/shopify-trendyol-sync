@@ -1,12 +1,12 @@
 {
-  "last_sync": "2026-10-16T11:02:27Z",
+  "last_sync": "2026-10-16T15:27:27Z",
   "synced_count": 119,
   "failed_count": 0,
   "total_with_barcode": 119,
   "total_without_barcode": 4,
   "batch_ids": [
-    "14444c00-c951-11f1-a746-aeea3e7dc49e-1792162949",
-    "147baf8c-c951-11f1-b9e6-4a3b27f3f353-1792162949"
+    "195cc58c-c976-11f1-a686-fe30fdbeed37-1792178849",
+    "1995af44-c976-11f1-acbc-86492319a686-1792178849"
   ],
   "unsynced_products": [
     {
@@ -19,31 +19,31 @@
     },
     {
       "title": "Hegerbaby KiddieTeeth Defender Fluoride Toothpaste 60g — Orange, with Probiotics & Vitamin C | UAE",
-      "variant": "Default Title",
+      "variant": "1",
       "sku": "-",
-      "shopify_price": 0.0,
-      "trendyol_price": 8.0,
+      "shopify_price": 30.0,
+      "trendyol_price": 45.5,
       "reason": "No barcode"
     },
     {
       "title": "Tiny Buds BuuBuu Digital Thermometer — Fast & Accurate Baby and Kids Thermometer | UAE",
-      "variant": "Default Title",
+      "variant": "1 Pc",
       "sku": "-",
-      "shopify_price": 0.0,
-      "trendyol_price": 8.0,
+      "shopify_price": 30.0,
+      "trendyol_price": 45.5,
       "reason": "No barcode"
     },
     {
       "title": "Tiny Buds I Love You Natural Massage Oil 60ml — Gentle Moisturising Baby Massage Oil | UAE",
-      "variant": "Default Title",
+      "variant": "60 ML",
       "sku": "-",
-      "shopify_price": 0.0,
-      "trendyol_price": 8.0,
+      "shopify_price": 30.0,
+      "trendyol_price": 45.5,
       "reason": "No barcode"
     }
   ],
   "status": "success",
-  "last_order_check": "2026-10-16T11:02:27Z",
+  "last_order_check": "2026-10-16T15:27:27Z",
   "trendyol_orders_processed": 0,
   "trendyol_items_adjusted": 0,
   "trendyol_adjustment_log": [],
