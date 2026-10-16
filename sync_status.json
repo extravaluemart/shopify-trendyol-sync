@@ -1,30 +1,14 @@
 {
-  "last_sync": "2026-10-16T05:37:42Z",
-  "synced_count": 108,
+  "last_sync": "2026-10-16T11:02:27Z",
+  "synced_count": 119,
   "failed_count": 0,
-  "total_with_barcode": 108,
-  "total_without_barcode": 12,
+  "total_with_barcode": 119,
+  "total_without_barcode": 4,
   "batch_ids": [
-    "b69da975-c923-11f1-8a3e-b25e31a89cf4-1792143465",
-    "b6e38b82-c923-11f1-a029-da67c185a6f6-1792143465"
+    "14444c00-c951-11f1-a746-aeea3e7dc49e-1792162949",
+    "147baf8c-c951-11f1-b9e6-4a3b27f3f353-1792162949"
   ],
   "unsynced_products": [
-    {
-      "title": "Tiny Buds Extra Sensitive Brighten Up Baby Face Cream 30g — For Sensitive Baby Skin | UAE",
-      "variant": "30g",
-      "sku": "021959901774",
-      "shopify_price": 38.0,
-      "trendyol_price": 55.5,
-      "reason": "No barcode"
-    },
-    {
-      "title": "Tiny Buds Sleepy Time Cleansing Splash 350ml — No-Rinse Baby Cleanser for Bedtime | UAE",
-      "variant": "350ML",
-      "sku": "021959904027",
-      "shopify_price": 50.0,
-      "trendyol_price": 70.5,
-      "reason": "No barcode"
-    },
     {
       "title": "Tiny Buds Natural Baby Bubble Bath 350ml — Gentle Tear-Free Bath Wash for Babies | UAE",
       "variant": "350ML",
@@ -34,80 +18,32 @@
       "reason": "No barcode"
     },
     {
-      "title": "Tiny Buds My Dragon Baby Gentle Baby Cologne 60ml",
-      "variant": "60ML",
-      "sku": "021959903914",
-      "shopify_price": 25.0,
-      "trendyol_price": 39.25,
-      "reason": "No barcode"
-    },
-    {
-      "title": "Tiny Buds Hello Honey Gentle Baby Cologne 60ML",
-      "variant": "60ML",
-      "sku": "021959902726",
-      "shopify_price": 25.0,
-      "trendyol_price": 39.25,
-      "reason": "No barcode"
-    },
-    {
-      "title": "Tiny Buds Toddler Training Toothpaste - Stage 2 Tutti Frutti 55g",
-      "variant": "55g",
-      "sku": "021959333391",
-      "shopify_price": 30.0,
-      "trendyol_price": 45.5,
-      "reason": "No barcode"
-    },
-    {
-      "title": "Tiny Buds Extra Sensitive Diaper Changing Spray (120ml)",
-      "variant": "120ML",
-      "sku": "021959901309",
-      "shopify_price": 35.0,
-      "trendyol_price": 51.75,
-      "reason": "No barcode"
-    },
-    {
-      "title": "Buds & Blooms Breastfeeding & Pump Lubrication Oil 60ml — Gentle Nursing Support Oil | UAE",
-      "variant": "60ML",
-      "sku": "4209598202544",
-      "shopify_price": 40.0,
-      "trendyol_price": 58.0,
-      "reason": "No barcode"
-    },
-    {
-      "title": "Buds & Blooms Breastfeeding Cleansing Mist Spray 100ml — Gentle Nipple & Breast Cleanser | UAE",
-      "variant": "100ML",
-      "sku": "4209598202698",
-      "shopify_price": 35.0,
-      "trendyol_price": 51.75,
-      "reason": "No barcode"
-    },
-    {
-      "title": "Buds & Blooms Nipple Nurse (15g)",
-      "variant": "15g",
-      "sku": "4209598202711",
-      "shopify_price": 40.0,
-      "trendyol_price": 58.0,
-      "reason": "No barcode"
-    },
-    {
-      "title": "Tiny Buds Sleepy Time Facial Serum (70ml)",
-      "variant": "70ML",
-      "sku": "021959904034",
-      "shopify_price": 45.0,
-      "trendyol_price": 64.25,
-      "reason": "No barcode"
-    },
-    {
-      "title": "Baby Hand-Pull Nasal Aspirator | Manual Snot Sucker for Infants & Kids",
-      "variant": "1 PC",
+      "title": "Hegerbaby KiddieTeeth Defender Fluoride Toothpaste 60g — Orange, with Probiotics & Vitamin C | UAE",
+      "variant": "Default Title",
       "sku": "-",
-      "shopify_price": 35.0,
-      "trendyol_price": 51.75,
+      "shopify_price": 0.0,
+      "trendyol_price": 8.0,
+      "reason": "No barcode"
+    },
+    {
+      "title": "Tiny Buds BuuBuu Digital Thermometer — Fast & Accurate Baby and Kids Thermometer | UAE",
+      "variant": "Default Title",
+      "sku": "-",
+      "shopify_price": 0.0,
+      "trendyol_price": 8.0,
+      "reason": "No barcode"
+    },
+    {
+      "title": "Tiny Buds I Love You Natural Massage Oil 60ml — Gentle Moisturising Baby Massage Oil | UAE",
+      "variant": "Default Title",
+      "sku": "-",
+      "shopify_price": 0.0,
+      "trendyol_price": 8.0,
       "reason": "No barcode"
     }
   ],
   "status": "success",
-  "last_order_check": "2026-10-16T05:37:42Z",
+  "last_order_check": "2026-10-16T11:02:27Z",
   "trendyol_orders_processed": 0,
   "trendyol_items_adjusted": 0,
   "trendyol_adjustment_log": [],
