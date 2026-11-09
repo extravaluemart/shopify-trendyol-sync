@@ -1,12 +1,12 @@
 {
-  "last_sync": "2026-11-09T00:39:15Z",
+  "last_sync": "2026-11-09T07:45:46Z",
   "synced_count": 119,
   "failed_count": 0,
   "total_with_barcode": 119,
-  "total_without_barcode": 4,
+  "total_without_barcode": 5,
   "batch_ids": [
-    "fec24f36-dbd5-11f1-a3cc-f20b77929419-1794199157",
-    "ff05e790-dbd5-11f1-acbc-86492319a686-1794199157"
+    "9436f361-dc11-11f1-a029-da67c185a6f6-1794224748",
+    "94958e68-dc11-11f1-b9e6-4a3b27f3f353-1794224749"
   ],
   "unsynced_products": [
     {
@@ -40,10 +40,18 @@
       "shopify_price": 30.0,
       "trendyol_price": 45.5,
       "reason": "No barcode"
+    },
+    {
+      "title": "Tiny Buds Hair Highness Vitamin Spray 50ml — Leave-In Hair & Scalp Spray with Natural Rice Essence | UAE",
+      "variant": "50 ML",
+      "sku": "-",
+      "shopify_price": 40.0,
+      "trendyol_price": 58.0,
+      "reason": "No barcode"
     }
   ],
   "status": "success",
-  "last_order_check": "2026-11-09T00:39:15Z",
+  "last_order_check": "2026-11-09T07:45:46Z",
   "trendyol_orders_processed": 0,
   "trendyol_items_adjusted": 0,
   "trendyol_adjustment_log": [],
