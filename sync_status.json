@@ -1,12 +1,12 @@
 {
-  "last_sync": "2026-11-19T02:23:49Z",
+  "last_sync": "2026-11-19T10:39:38Z",
   "synced_count": 120,
   "failed_count": 0,
   "total_with_barcode": 120,
-  "total_without_barcode": 4,
+  "total_without_barcode": 7,
   "batch_ids": [
-    "42c5a10c-e3c0-11f1-8ecc-5a093b12131b-1795069431",
-    "4344469c-e3c0-11f1-8927-ce58dff1180c-1795069432"
+    "86277bf4-e405-11f1-af66-62c6bdff15f9-1795099180",
+    "86660ba9-e405-11f1-9698-f2d568b1d5a0-1795099180"
   ],
   "unsynced_products": [
     {
@@ -40,10 +40,34 @@
       "shopify_price": 30.0,
       "trendyol_price": 45.5,
       "reason": "No barcode"
+    },
+    {
+      "title": "Tiny Buds Brighten Up Baby Lotion 200ml — Nourishing Brightening Body Lotion | UAE",
+      "variant": "200ml",
+      "sku": "-",
+      "shopify_price": 45.0,
+      "trendyol_price": 64.25,
+      "reason": "No barcode"
+    },
+    {
+      "title": "Tenderoo Baby Cologne Dreamy Orchard — Gentle Alcohol-Free Baby Fragrance | UAE",
+      "variant": "50ml",
+      "sku": "-",
+      "shopify_price": 30.0,
+      "trendyol_price": 45.5,
+      "reason": "No barcode"
+    },
+    {
+      "title": "Kamay ni Nanay Repelix SPF 30+ Sun Defender Moisturizing Lotion — Water-Resistant UVA & UVB Protection | UAE",
+      "variant": "Standard",
+      "sku": "-",
+      "shopify_price": 40.0,
+      "trendyol_price": 58.0,
+      "reason": "No barcode"
     }
   ],
   "status": "success",
-  "last_order_check": "2026-11-19T02:23:49Z",
+  "last_order_check": "2026-11-19T10:39:38Z",
   "trendyol_orders_processed": 0,
   "trendyol_items_adjusted": 0,
   "trendyol_adjustment_log": [],
